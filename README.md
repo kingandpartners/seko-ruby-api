@@ -7,7 +7,7 @@ Ruby wrapper for Seko Logistics' SupplyStream iHub REST API
 ## Possible Integrations
 
 1.  Inbound Product Master Upload and method (via Integration or Manual csv upload)
-2.  Inbound Companies Upload and method ((via Integration or Manual csv upload)
+2.  Inbound Companies Upload and method (via Integration or Manual csv upload)
 3.  Inbound Advanced Shipment Notification (via Integration or Manual csv upload)
 4.  **Inbound Sales Order (Integration)**
 5.  Retrieve GRN’s
