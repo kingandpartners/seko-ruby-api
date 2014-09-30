@@ -10,7 +10,10 @@ module Seko
     API_PATH     = '/hub/api/'
     API_VERSION  = 'v1'
     CONTENT_TYPE = 'application/json'
-    KEYS_MAP     = { "FreeQuantity" => "upc" }
+    KEYS_MAP     = { 
+      "FreeQuantity" => "quantity", 
+      "ProductCode"  => "upc" 
+    }
 
     attr_accessor :token, :response, :type, :request_uri, :path, :service, :endpoint
 
@@ -30,8 +33,12 @@ module Seko
     def get_inventory
       @service  = 'stock'
       @endpoint = 'all'
+      response = inventory_request.body["Response"]["List"]["StockQuantityLineItem"]
+      map_results(response)
+    end
+
+    def inventory_request
       get(request_uri)
-      # map_results(post(request).response['stock'])
     end
 
     # def order_request(order)
@@ -111,22 +118,15 @@ module Seko
       @response = Response.new(json_response, @type)
     end
 
-    # def map_results(results)
-    #   results = flatten_results(results)
-    #   results.map do |h|
-    #     h.inject({ }) { |x, (k,v)| x[map_keys(k)] = v; x }
-    #   end
-    # end
+    def map_results(results)
+      results.map do |h|
+        h.inject({ }) { |x, (k,v)| x[map_keys(k)] = v; x }
+      end
+    end
 
-    # def flatten_results(results)
-    #   @flattened ||= results.map do |h| 
-    #     h.each { |k,v| h[k] = v[0] }
-    #   end
-    # end
-
-    # def map_keys(key)
-    #   KEYS_MAP[key] || key
-    # end
+    def map_keys(key)
+      KEYS_MAP[key] || key
+    end
 
   end
 end

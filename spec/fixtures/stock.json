@@ -1,0 +1,29 @@
+{
+  "Response": {
+    "List": {
+      "StockQuantityLineItem": [
+        {
+          "DCCode": {},
+          "EAN": {},
+          "FreeQuantity": 0,
+          "LocationType": "Available",
+          "ProductCode": 100014
+        },
+        {
+          "DCCode": {},
+          "EAN": {},
+          "FreeQuantity": 10,
+          "LocationType": "Available",
+          "ProductCode": 100015
+        },
+        {
+          "DCCode": {},
+          "EAN": {},
+          "FreeQuantity": 20,
+          "LocationType": "Available",
+          "ProductCode": 100016
+        }
+      ]
+    }
+  }
+}
