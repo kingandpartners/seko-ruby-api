@@ -33,8 +33,8 @@ module Seko
     def get_inventory
       @service  = 'stock'
       @endpoint = 'all'
-      response = inventory_request.body["Response"]["List"]["StockQuantityLineItem"]
-      map_results(response)
+      response = Response.new(inventory_request.body) # ["Response"]["List"]["StockQuantityLineItem"]
+      # map_results(response)
     end
 
     def inventory_request
