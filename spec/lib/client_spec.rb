@@ -14,4 +14,14 @@ describe Seko::Client do
     end
   end
 
+  describe '#submit_product' do
+    it 'submits a product' do
+      stub_post("products/v1/submit.json").with(query: {token: token}).
+        to_return(body: fixture(:stock), headers: json_headers)
+      response = client.get_inventory
+      expect(response.map { |x| x["quantity"] }).to eq([0, 10, 20])
+      expect(response.map { |x| x["upc"] }).to eq([100014, 100015, 100016])
+    end
+  end
+
 end

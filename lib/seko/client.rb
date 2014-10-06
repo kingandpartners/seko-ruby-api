@@ -41,6 +41,14 @@ module Seko
       get(request_uri)
     end
 
+    def submit_product(product_hash)
+      @service  = 'products'
+      @endpoint = 'submit'
+      request = post(request_uri, Product.new(product_hash))
+      response = Response.new(request.body)
+    end
+
+
     # def order_request(order)
     #   # @path = Order::PATH
     #   # Order.new(self).build_order_request(order)
@@ -66,7 +74,7 @@ module Seko
     def default_options
       { 
         verbose: true,
-        test_mode: true
+        test_mode: true # FIXME: change once testing is complete
       }
     end
 
@@ -108,7 +116,7 @@ module Seko
       response = http.request(request)
     end
 
-    def post(json_request)
+    def post(url, json_request)
       response = request(json_request)
       parse_response(response.body)
     end
