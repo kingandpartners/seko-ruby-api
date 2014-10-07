@@ -39,7 +39,61 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+
+order = {
+  carrier: "FEDEX",
+  billing_address:  { 
+    first_name: "John",
+    last_name:  "Smith",
+    address1:   "123 Here Now",
+    address2:   "2nd Floor",
+    address3:   "",
+    city:       "New York",
+    state:      "New York",
+    country:    "US",
+    zipcode:    "10012",
+    phone:      "123-123-1234"
+  },
+  shipping_address: {
+    first_name: "John",
+    last_name:  "Smith",
+    address1:   "123 Here Now",
+    address2:   "2nd Floor",
+    address3:   "",
+    city:       "New York",
+    state:      "New York",
+    country:    "US",
+    zipcode:    "10012",
+    phone:      "123-123-1234"
+  },
+  gift_wrap:    "true",
+  gift_message: "Happy Birthday!",
+  email:        "someone@somehwere.com",
+  number:       "R123123123",
+  type:         "OO",
+  line_items: [
+    {
+      price:    "127.23",
+      quantity: "1",
+      sku:      "123332211",
+      size:     "XS"
+    }
+  ],
+  shipping_code: "90",
+  invoice_url:   "http://example.com/R123123123/invoice"
+}
+
+client   = Seko::Client.new("token")
+response = client.send_order_request(order)
+
+if response.success?
+  # DO SOMETHING
+else
+  # QUEUE REQUEST, STORE AND RAISE ERRORS
+end
+
+```
 
 ## Contributing
 

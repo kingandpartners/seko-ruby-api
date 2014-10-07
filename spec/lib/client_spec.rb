@@ -16,11 +16,12 @@ describe Seko::Client do
 
   describe '#submit_product' do
     it 'submits a product' do
-      stub_post("products/v1/submit.json").with(query: {token: token}).
-        to_return(body: fixture(:stock), headers: json_headers)
-      response = client.get_inventory
-      expect(response.map { |x| x["quantity"] }).to eq([0, 10, 20])
-      expect(response.map { |x| x["upc"] }).to eq([100014, 100015, 100016])
+      product_hash = {test: '123'}
+      stub_post("products/v1/submit.json").
+        to_return(status: 200, body: success_response.to_json, headers: json_headers)
+      expect(Seko::Product).to receive(:new).with(product_hash)
+      response = client.submit_product(product_hash)
+      expect(response.success?).to eq(true)
     end
   end
 

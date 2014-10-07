@@ -44,8 +44,7 @@ module Seko
     def submit_product(product_hash)
       @service  = 'products'
       @endpoint = 'submit'
-      request = post(request_uri, Product.new(product_hash))
-      response = Response.new(request.body)
+      post(request_uri, Product.new(product_hash))
     end
 
 
@@ -67,7 +66,11 @@ module Seko
     # end
 
     def request_uri
-      "https://#{host}#{API_PATH}#{service}/#{API_VERSION}/#{endpoint}.json?token=#{token}"
+      "https://#{host}#{path}?token=#{token}"
+    end
+
+    def path
+      "#{API_PATH}#{service}/#{API_VERSION}/#{endpoint}.json"
     end
 
     private
@@ -99,8 +102,8 @@ module Seko
       @http ||= Net::HTTP.new(host, PORT)
     end
 
-    def request(json_request, type = :post)
-      request              = Net::HTTP.const_get(type.to_s.capitalize).new(@path)
+    def request(json_request)
+      request              = Net::HTTP::Post.new(path)
       request.body         = json_request
       request.content_type = CONTENT_TYPE
       http.use_ssl         = true
@@ -123,7 +126,7 @@ module Seko
 
     def parse_response(json_response)
       log(json_response)
-      @response = Response.new(json_response, @type)
+      @response = Response.new(json_response)
     end
 
     def map_results(results)

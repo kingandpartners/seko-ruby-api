@@ -1,0 +1,70 @@
+{
+  "Request": {
+    "List": [
+      {
+        "SupplierMapping": [
+          {
+            "SupplierCode": "Supplier Code",
+            "SupplierDescription": "Supplier Description",
+            "UOM": "UOM"
+          },
+          {
+            "SupplierCode": "Supplier Code",
+            "SupplierDescription": "Supplier Description",
+            "UOM": "UOM"
+          },
+          {
+            "SupplierCode": "Supplier Code",
+            "SupplierDescription": "Supplier Description",
+            "UOM": "UOM"
+          }
+        ]
+      },
+      {
+        "ShipToCompanyMapping": [
+          {
+            "BranchCode": "Branch Code (Optional)",
+            "CompanyCode": "Company Code (Optional)",
+            "MappedCode": "Mapped Code (Optional)"
+          },
+          {
+            "BranchCode": "Branch Code (Optional)",
+            "CompanyCode": "Company Code (Optional)",
+            "MappedCode": "Mapped Code (Optional)"
+          },
+          {
+            "BranchCode": "Branch Code (Optional)",
+            "CompanyCode": "Company Code (Optional)",
+            "MappedCode": "Mapped Code (Optional)"
+          }
+        ]
+      },
+      {
+        "ProductIdentifier": [
+          {
+            "Name": "Name (Optional)",
+            "SortOrder": "Sort Order (Optional)",
+            "Value": "Value (Optional)"
+          },
+          {
+            "Name": "Name (Optional)",
+            "SortOrder": "Sort Order (Optional)",
+            "Value": "Value (Optional)"
+          },
+          {
+            "Name": "Name (Optional)",
+            "SortOrder": "Sort Order (Optional)",
+            "Value": "Value (Optional)"
+          }
+        ]
+      }
+    ],
+    "ProductMaster": {
+      "EAN": "EAN (Optional)",
+      "HTSCode": "HTS Code (Optional)",
+      "ProductCode": "Product Code",
+      "ProductDescription": "Product Description (Optional)",
+      "ProductLongDescription": "Product Long Description (Optional)"
+    }
+  }
+}

@@ -7,7 +7,7 @@ module Seko
     end
 
     def success?
-      @parsed["CallStatus"]["Success"]
+      @parsed["Response"]["CallStatus"]["Success"]
     end
 
     def failure?
