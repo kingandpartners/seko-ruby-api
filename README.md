@@ -1,5 +1,7 @@
 # Seko
 
+[![Build Status](https://travis-ci.org/jGRUBBS/seko-ruby-api.svg?branch=master)](https://travis-ci.org/jGRUBBS/seko-ruby-api.svg?branch=master)
+
 Ruby wrapper for Seko Logistics' SupplyStream iHub REST API
 
 [SupplyStream REST API Documentation](https://wiki.supplystream.com/GetFile.aspx?Page=MANUAL.Integration-Hub-Rest-APIs&File=integration-ihub-rest-apis-v1.4.pdf)
