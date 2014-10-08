@@ -34,13 +34,14 @@ Ruby wrapper for Seko Logistics' SupplyStream iHub REST API
 
 ## Questions / Issues
 
-- will Seko / SupplyStream be sending any API requests to Sellect indicating orders have been shipped with tracking information?
+- can Seko / SupplyStream send an API request to Sellect indicating orders have been shipped with tracking information? I think this is much more efficient than us periodically polling for the status of orders.
 - [receipts] what is LineNumber?
 - [receipts] what is SupplierCompanyCode and what would it be for L&J is it the same as SupplierCode?
 - [receipts] what is ASNNumber and what would it be for L&J?
 - [receipts] getting this error `Error Submitting Receipt:  - Error. DC not specified` though in the documentation it says the DC Code is optional, tried adding DCCode to request and still failed. Not sure what to do here.
 - not all responses from Seko include the "Response" object at the root of the response - especially in failed responses - this seems like a mistake in the API.
 - where is the documentation for 'Inbound Advanced Shipment Notification'?
+- will L&J have inventory in two warehouses? i.e. DCCL01 (UK Warehouse) or DCSOM01 (US Warehouse)
 
 ## Installation
 
