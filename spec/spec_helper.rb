@@ -45,8 +45,26 @@ def success_response
         "Code"     => 0,
         "Message"  => {},
         "Success"  => true
-      },
-      "GUID" => "3ea9eb61-7f49-4c03-986a-9340da72c6d4"
+      }
     }
+  }
+end
+
+def error_product_response
+  {
+    "CallStatus" => {
+      "Success" => false,
+      "Code" => 100,
+      "Message" => "Error Submitting Product Master: LJ-W-BERN-S-GW - Error. Product Code already exists."
+    }
+  }
+end
+
+def configuration
+  { 
+    supplier_code: "Supplier1", 
+    supplier_description: "My Supplier", 
+    supplier_uom: 1,
+    asn_number: 123456
   }
 end

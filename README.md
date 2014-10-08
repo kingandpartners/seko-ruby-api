@@ -6,20 +6,39 @@ Ruby wrapper for Seko Logistics' SupplyStream iHub REST API
 
 ## Possible Integrations
 
-1.  Inbound Product Master Upload and method (via Integration or Manual csv upload)
-2.  Inbound Companies Upload and method (via Integration or Manual csv upload)
-3.  Inbound Advanced Shipment Notification (via Integration or Manual csv upload)
-4.  **Inbound Sales Order (Integration)**
+1.  Inbound Product Master Upload and method
+2.  Inbound Companies Upload and method
+3.  Inbound Advanced Shipment Notification
+4.  Inbound Sales Order
 5.  Retrieve GRN’s
-6.  **Retrieve Stock Quantity**
+6.  Retrieve Stock Quantity
 7.  Retrieve Tracking Details
 8.  Retrieve Sales Order Status
 9.  Retrieve Stock Adjustments
 10. Retrieve Stock Movements
 
-## Questions
+## Process
 
-- does Seko / SupplyStream provide shipment notifications to a specified end-point?
+1.  Sellect or K&P need to load product masters in SS through the UAT Integration Hub or
+2.  Please provide these to me on a CSV file as per the template attached and I will load these using the manual upload function in the UAT integration hub
+3.  Receipts (ASN’s) need to be sent to SS through the UAT Integration Hub or
+4.  I will upload a few lines of the products on the attached template using the manual upload function in the UAT Integration Hub
+5.  I will the create the GRN’s in SS
+6.  Sellect or K&P will then be able to retrieve the GRN’s and Stock Quantities
+7.  Sellect or K&P will then need to send Sales Orders on products that have available Stock
+8.  These can be sent to DCCL01 (UK Warehouse) or DCSOM01 (US Warehouse)
+9.  I will then pick, pack and dispatch the orders in SS
+10. Sellect or K&P can then retrieve sales order status, dispatch status and dispatch (tracking) details
+
+## Questions / Issues
+
+- will Seko / SupplyStream be sending any API requests to Sellect indicating orders have been shipped with tracking information?
+- [receipts] what is LineNumber?
+- [receipts] what is SupplierCompanyCode and what would it be for L&J is it the same as SupplierCode?
+- [receipts] what is ASNNumber and what would it be for L&J?
+- [receipts] getting this error `Error Submitting Receipt:  - Error. DC not specified` though in the documentation it says the DC Code is optional, tried adding DCCode to request and still failed. Not sure what to do here.
+- not all responses from Seko include the "Response" object at the root of the response - especially in failed responses - this seems like a mistake in the API.
+- where is the documentation for 'Inbound Advanced Shipment Notification'?
 
 ## Installation
 
@@ -38,9 +57,41 @@ Or install it yourself as:
     $ gem install seko
 
 ## Usage
+#### Configuration
+config/initializers/seko.rb
+```ruby
+Seko.configure(
+  supplier_code:        'DEFSUPLJLTD001',
+  supplier_description: 'Default Supplier LARSSON & JENNINGS LTD',
+  supplier_uom:         1
+)
+```
+
+#### Submit Product
 
 ```ruby
+client   = Seko::Client.new("token")
+response = client.submit_product(upc: "123456", description: 'A test product')
+```
 
+#### Submit Receipt
+
+```ruby
+line_item_array = [ { id: 1, upc: "123456", quantity: 10 } ]
+client     = Seko::Client.new("token")
+response   = client.submit_receipt(line_item_array)
+```
+
+#### Get Stock
+
+```ruby
+client     = Seko::Client.new("token")
+response   = client.get_inventory
+```
+
+#### Submit Order
+
+```ruby
 order = {
   carrier: "FEDEX",
   billing_address:  { 
@@ -92,7 +143,6 @@ if response.success?
 else
   # QUEUE REQUEST, STORE AND RAISE ERRORS
 end
-
 ```
 
 ## Contributing

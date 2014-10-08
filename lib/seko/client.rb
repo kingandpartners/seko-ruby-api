@@ -33,8 +33,9 @@ module Seko
     def get_inventory
       @service  = 'stock'
       @endpoint = 'all'
-      response = Response.new(inventory_request.body) # ["Response"]["List"]["StockQuantityLineItem"]
-      # map_results(response)
+      response  = Response.new(inventory_request.body)
+      response.parsed = map_results(Stock.parse(response))
+      response
     end
 
     def inventory_request
@@ -44,9 +45,14 @@ module Seko
     def submit_product(product_hash)
       @service  = 'products'
       @endpoint = 'submit'
-      post(request_uri, Product.new(product_hash))
+      post(Product.format(product_hash))
     end
 
+    def submit_receipt(line_item_array)
+      @service  = 'receipts'
+      @endpoint = 'submit'
+      post(Receipt.format(line_item_array))
+    end
 
     # def order_request(order)
     #   # @path = Order::PATH
@@ -103,8 +109,8 @@ module Seko
     end
 
     def request(json_request)
-      request              = Net::HTTP::Post.new(path)
-      request.body         = json_request
+      request              = Net::HTTP::Post.new(request_uri)
+      request.body         = json_request.to_json
       request.content_type = CONTENT_TYPE
       http.use_ssl         = true
       http.verify_mode     = OpenSSL::SSL::VERIFY_NONE
@@ -119,7 +125,7 @@ module Seko
       response = http.request(request)
     end
 
-    def post(url, json_request)
+    def post(json_request)
       response = request(json_request)
       parse_response(response.body)
     end

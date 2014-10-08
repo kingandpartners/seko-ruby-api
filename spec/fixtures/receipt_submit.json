@@ -1,0 +1,23 @@
+{
+  "Request": {
+    "List": {
+      "ReceiptLineItem": [
+        {
+          "LineNumber": 1,
+          "ProductCode": 100083,
+          "Quantity": 10,
+          "SupplierCompanyCode": "Supplier1"
+        },
+        {
+          "LineNumber": 2,
+          "ProductCode": 100076,
+          "Quantity": 15,
+          "SupplierCompanyCode": "Supplier1"
+        }
+      ]
+    },
+    "Receipt": {
+      "ASNNumber": 123456
+    }
+  }
+}
