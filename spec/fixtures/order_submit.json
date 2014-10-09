@@ -1,0 +1,31 @@
+{
+  "Request": {
+    "DeliveryDetails": {
+      "City": "Windsor",
+      "CountryCode": "GB",
+      "EmailAddress": "stephen.jones@gmail.com",
+      "FirstName": "Stephen",
+      "LastName": "Jones",
+      "Line1": "23 Victoria Street",
+      "PhoneNumber": "0123 336 6676",
+      "PostcodeZip": "SL4 1HE"
+    },
+    "List": {
+      "SalesOrderLineItem": [
+        {
+          "LineNumber": 1,
+          "ProductCode": 100083,
+          "Quantity": 2
+        }
+      ]
+    },
+    "SalesOrder": {
+      "SalesOrderDate": "2013-12-12",
+      "SalesOrderNumber": 123456
+    },
+    "ShipToCompany": {
+      "CompanyCode": "IND001",
+      "CompanyDescription": "Indigina"
+    }
+  }
+}

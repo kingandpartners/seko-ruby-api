@@ -30,6 +30,11 @@ module Seko
     #   # post(request)
     # end
 
+    # def order_request(order)
+    #   # @path = Order::PATH
+    #   # Order.new(self).build_order_request(order)
+    # end
+
     def get_inventory
       @service  = 'stock'
       @endpoint = 'all'
@@ -48,19 +53,14 @@ module Seko
       post(Product.format(product_hash))
     end
 
-    def submit_receipt(line_item_array)
+    def submit_receipt(line_item_array, warehouse)
       @service  = 'receipts'
       @endpoint = 'submit'
-      post(Receipt.format(line_item_array))
+      post(Receipt.format(line_item_array, warehouse))
     end
 
-    # def order_request(order)
-    #   # @path = Order::PATH
-    #   # Order.new(self).build_order_request(order)
-    # end
-
     # def upcs(inventory)
-    #   # inventory.collect { |s| s["upc"] }
+    #   inventory.collect { |s| s["upc"] }
     # end
 
     # def mapped_inventory(upcs, inventory)
@@ -82,7 +82,7 @@ module Seko
     private
     def default_options
       { 
-        verbose: true,
+        verbose: false,
         test_mode: true # FIXME: change once testing is complete
       }
     end

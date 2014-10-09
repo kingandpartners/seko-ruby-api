@@ -12,17 +12,24 @@ module Seko
       end
     end
 
-    def self.format(items)
+    def self.format(items, warehouse)
       {
         "Request" => {
           "List" => {
             "ReceiptLineItem" => line_items(items)
           },
           "Receipt" => {
-            "ASNNumber" => Seko.config[:asn_number]
-          }  
+            "ASNNumber" => random_asn
+          },
+          "ReceiptHeader" => {
+            "DCCode" => warehouse
+          }
         }
       }
+    end
+
+    def self.random_asn
+      rand.to_s[2..11]
     end
 
   end

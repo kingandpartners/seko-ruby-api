@@ -11,7 +11,7 @@ module Seko
     supplier_code: '',
     supplier_description: '',
     supplier_uom: 1,
-    asn_number: ''
+    warehouses: {}
   }
 
   def self.configure(opts = {})

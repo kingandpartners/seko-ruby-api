@@ -18,6 +18,9 @@
     },
     "Receipt": {
       "ASNNumber": 123456
+    },
+    "ReceiptHeader": {
+      "DCCode": "DC123"
     }
   }
 }

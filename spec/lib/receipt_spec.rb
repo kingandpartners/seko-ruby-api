@@ -22,7 +22,14 @@ describe Seko::Receipt do
   describe '.format' do
     it 'formats a fully formed JSON ready hash for receipt' do
       expected_result = fixture(:receipt_submit)
-      expect(Seko::Receipt.format(line_items_array)).to eq(expected_result)
+      expect(Seko::Receipt).to receive(:random_asn).and_return(123456)
+      expect(Seko::Receipt.format(line_items_array, 'DC123')).to eq(expected_result)
+    end
+  end
+
+  describe '.random_asn' do
+    it 'generates a 10 digit random string' do
+      expect(Seko::Receipt.random_asn).to satisfy { |value| value.size == 10 }
     end
   end
 
