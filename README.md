@@ -77,7 +77,7 @@ response = client.submit_product(upc: "123456", description: 'A test product')
 
 ```ruby
 line_item_array = [ { id: 1, upc: "123456", quantity: 10 } ]
-warehouse  = 'DC123'
+warehouse  = Seko.config[:warehouses][:us]
 client     = Seko::Client.new("token")
 response   = client.submit_receipt(line_item_array, warehouse)
 ```
@@ -107,7 +107,7 @@ response = client.order_status('5b2dcd8e-52c3-4e27-a712-eaacda2dd8fe')
 
 ```ruby
 client    = Seko::Client.new("token")
-warehouse = 'DC123'
+warehouse = Seko.config[:warehouses][:us]
 from      = 3.days.ago.strftime('%F')
 to        = Time.now.strftime('%F')
 response  = client.stock_movements(from, to, warehouse)
@@ -117,7 +117,7 @@ response  = client.stock_movements(from, to, warehouse)
 
 ```ruby
 client    = Seko::Client.new("token")
-warehouse = 'DC123'
+warehouse = Seko.config[:warehouses][:us]
 from      = 3.days.ago.strftime('%F')
 to        = Time.now.strftime('%F')
 response  = client.stock_adjustments(from, to, warehouse)
