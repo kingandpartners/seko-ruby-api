@@ -7,11 +7,11 @@ matrix:
     - rvm: rbx-19mode
 
 script:
-- bundle exec rspec
+- CODECLIMATE_REPO_TOKEN=dd4351c1e437fe6bb682de8e30eae582e627b4e0959ed3202839ad057af5d4d1 bundle exec rspec
 
-addons:
-   code_climate:
-     repo_token: dd4351c1e437fe6bb682de8e30eae582e627b4e0959ed3202839ad057af5d4d1 
+# addons:
+#    code_climate:
+#      repo_token: dd4351c1e437fe6bb682de8e30eae582e627b4e0959ed3202839ad057af5d4d1 
 
 notifications:
   email:

@@ -8,6 +8,8 @@ require 'hashie'
 
 Bundler.setup
 
+WebMock.disable_net_connect!(:allow => "codeclimate.com")
+
 RSpec.configure do |config|
   config.include WebMock::API
 end
