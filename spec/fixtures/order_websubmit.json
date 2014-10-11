@@ -7,6 +7,7 @@
       "FirstName": "Stephen",
       "LastName": "Jones",
       "Line1": "23 Victoria Street",
+      "Line2": "",
       "PhoneNumber": "0123 336 6676",
       "PostcodeZip": "SL4 1HE"
     },
@@ -19,6 +20,7 @@
         }
       ]
     },
+    "SalesOrderHeader": { "DCCode": "DC123" },
     "WebSalesOrder": {
       "SalesOrderDate": "2013-12-12",
       "SalesOrderNumber": 123456

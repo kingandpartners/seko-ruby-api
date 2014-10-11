@@ -2,18 +2,18 @@
 
 [![Build Status](https://travis-ci.org/jGRUBBS/seko-ruby-api.svg?branch=master)](https://travis-ci.org/jGRUBBS/seko-ruby-api.svg?branch=master)
 
-Ruby wrapper for Seko Logistics' SupplyStream iHub REST API
+Ruby wrapper for Seko Logistics' SupplyStream iHub REST API v1
 
 [SupplyStream REST API Documentation](https://wiki.supplystream.com/GetFile.aspx?Page=MANUAL.Integration-Hub-Rest-APIs&File=integration-ihub-rest-apis-v1.4.pdf)
 
 ## Possible Integrations
 
-1.  Inbound Product Master Upload and method
-2.  Inbound Companies Upload and method
-3.  Inbound Advanced Shipment Notification
-4.  Inbound Sales Order
+1.  **Inbound Product Master Upload and method**
+2.  **Inbound Companies Upload and method**
+3.  **Inbound Advanced Shipment Notification**
+4.  **Inbound Sales Order**
 5.  Retrieve GRN’s
-6.  Retrieve Stock Quantity
+6.  **Retrieve Stock Quantity**
 7.  Retrieve Tracking Details
 8.  Retrieve Sales Order Status
 9.  Retrieve Stock Adjustments
@@ -31,11 +31,6 @@ Ruby wrapper for Seko Logistics' SupplyStream iHub REST API
 8.  These can be sent to DCCL01 (UK Warehouse) or DCSOM01 (US Warehouse)
 9.  I will then pick, pack and dispatch the orders in SS
 10. Sellect or K&P can then retrieve sales order status, dispatch status and dispatch (tracking) details
-
-## Questions / Issues
-
-- I successfully submitted receipts; however, when retreiving stock the items appear but with different quantities than I submitted with the receipts.
-- What country codes do you expect? Is there a particular format you follow?
 
 
 ## Installation
@@ -122,6 +117,7 @@ order = {
   email:        "someone@somehwere.com",
   number:       "R123123123",
   type:         "OO",
+  warehouse:    "DC123",
   line_items: [
     {
       price:    "127.23",

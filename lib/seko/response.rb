@@ -22,7 +22,7 @@ module Seko
 
     def message
       message = root_response["CallStatus"]["Message"]
-      message.blank? ? "" : message
+      message.empty? ? "" : message
     end
 
   end

@@ -1,0 +1,21 @@
+{
+  "Request": {
+    "Company": {
+      "CompanyCode": 123456,
+      "CompanyDescription": "My Test company",
+      "CompanyType": "Ship To"
+    },
+    "List": {
+      "Address": {
+        "AddressLine1": "The Farthings",
+        "AddressLine2": "Sandpits Lane",
+        "AddressLine3": "Beaconsfield",
+        "AddressType": "Delivery",
+        "City": "High Wycombe",
+        "CountryCode": "GB",
+        "County": "Buckinghamshire",
+        "PostcodeZip": "HP8 TTT"
+      }
+    }
+  }
+}

@@ -9,9 +9,9 @@ matrix:
 script:
 - bundle exec rspec
 
-# addons:
-#    code_climate:
-#      repo_token: f0884115cadbe82b33756e38a9cd32d5129304746a17126d6c7da02e7a69910a
+addons:
+   code_climate:
+     repo_token: dd4351c1e437fe6bb682de8e30eae582e627b4e0959ed3202839ad057af5d4d1 
 
 notifications:
   email:

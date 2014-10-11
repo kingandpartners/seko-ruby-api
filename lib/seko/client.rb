@@ -11,11 +11,11 @@ module Seko
     API_VERSION  = 'v1'
     CONTENT_TYPE = 'application/json'
     KEYS_MAP     = { 
-      "FreeQuantity" => "quantity", 
+      "FreeQuantity" => "qty", 
       "ProductCode"  => "upc" 
     }
 
-    attr_accessor :token, :response, :type, :request_uri, :path, :service, :endpoint
+    attr_accessor :token, :response, :type, :request_uri, :path, :service, :endpoint, :options
 
     def initialize(token, options = {})
       raise "Token is required" unless token
@@ -24,27 +24,42 @@ module Seko
       @options = default_options.merge!(options)
     end
 
-    # def send_order_request(order)
-    #   # request  = order_request(order)
-    #   # @path    = Order::PATH
-    #   # post(request)
-    # end
-
-    # def order_request(order)
-    #   # @path = Order::PATH
-    #   # Order.new(self).build_order_request(order)
-    # end
+    def send_order_request(order_hash)
+      @service  = 'salesorders'
+      @endpoint = 'websubmit'
+      post(Order.websubmit(order_hash))
+    end
 
     def get_inventory
       @service  = 'stock'
       @endpoint = 'all'
-      response  = Response.new(inventory_request.body)
+      inventory_response
+    end
+
+    def inventory_response
+      response = get
       response.parsed = map_results(Stock.parse(response))
       response
     end
 
-    def inventory_request
-      get(request_uri)
+    def upcs(inventory)
+      inventory.collect { |s| s["upc"] }
+    end
+
+    def mapped_inventory(upcs, inventory)
+      inventory.collect do |stock| 
+        if upcs.include?(stock["upc"])
+          { quantity: stock["qty"].to_i }
+        end
+      end.compact
+    end
+
+    def map_results(results)
+      results.map { |h| h.inject({ }) { |x, (k,v)| x[map_keys(k)] = v; x } }
+    end
+
+    def map_keys(key)
+      KEYS_MAP[key] || key
     end
 
     def submit_product(product_hash)
@@ -59,17 +74,11 @@ module Seko
       post(Receipt.format(line_item_array, warehouse))
     end
 
-    # def upcs(inventory)
-    #   inventory.collect { |s| s["upc"] }
-    # end
-
-    # def mapped_inventory(upcs, inventory)
-    #   # inventory.collect do |stock| 
-    #   #   if upcs.include?(stock["upc"])
-    #   #     { quantity: stock["qty"].to_i }
-    #   #   end
-    #   # end.compact
-    # end
+    def submit_company(company_hash)
+      @service  = 'companies'
+      @endpoint = 'submit'
+      post(Company.format(company_hash))
+    end
 
     def request_uri
       "https://#{host}#{path}?token=#{token}"
@@ -82,8 +91,8 @@ module Seko
     private
     def default_options
       { 
-        verbose: false,
-        test_mode: true # FIXME: change once testing is complete
+        verbose: true,
+        test_mode: true
       }
     end
 
@@ -108,41 +117,33 @@ module Seko
       @http ||= Net::HTTP.new(host, PORT)
     end
 
-    def request(json_request)
-      request              = Net::HTTP::Post.new(request_uri)
-      request.body         = json_request.to_json
+    def build_request(type)
+      request = Net::HTTP.const_get(type).new(request_uri)
       request.content_type = CONTENT_TYPE
-      http.use_ssl         = true
-      http.verify_mode     = OpenSSL::SSL::VERIFY_NONE
-      http.request(request)
+      request
     end
 
-    def get(url)
-      request = Net::HTTP::Get.new(URI(url))
-      request.content_type = CONTENT_TYPE
-      http.use_ssl         = true
-      http.verify_mode     = OpenSSL::SSL::VERIFY_NONE
+    def request(request, json_request = nil)
+      http.use_ssl     = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       response = http.request(request)
+      parse_response(response.body)
+    end
+
+    def get
+      request = build_request('Get')
+      request(request)
     end
 
     def post(json_request)
-      response = request(json_request)
-      parse_response(response.body)
+      request      = build_request('Post')
+      request.body = json_request.to_json
+      request(request)
     end
 
     def parse_response(json_response)
       log(json_response)
       @response = Response.new(json_response)
-    end
-
-    def map_results(results)
-      results.map do |h|
-        h.inject({ }) { |x, (k,v)| x[map_keys(k)] = v; x }
-      end
-    end
-
-    def map_keys(key)
-      KEYS_MAP[key] || key
     end
 
   end
