@@ -80,6 +80,36 @@ module Seko
       post(Company.format(company_hash))
     end
 
+    def check_grn(guid)
+      @service  = 'grns'
+      @endpoint = guid
+      get
+    end
+
+    def order_status(guid)
+      @service  = 'salesorders'
+      @endpoint = "#{guid}/status"
+      get
+    end
+
+    def order_tracking(guid)
+      @service  = 'salesorders'
+      @endpoint = "#{guid}/tracking"
+      get
+    end
+
+    def stock_adjustments(from, to, warehouse)
+      @service  = 'stock'
+      @endpoint = "adjustment/#{from}/#{to}"
+      get("#{request_uri}&dc=#{warehouse}")
+    end
+
+    def stock_movements(from, to, warehouse)
+      @service  = 'stock'
+      @endpoint = "movement/#{from}/#{to}"
+      get("#{request_uri}&dc=#{warehouse}")
+    end
+
     def request_uri
       "https://#{host}#{path}?token=#{token}"
     end
@@ -117,8 +147,8 @@ module Seko
       @http ||= Net::HTTP.new(host, PORT)
     end
 
-    def build_request(type)
-      request = Net::HTTP.const_get(type).new(request_uri)
+    def build_request(type, url = request_uri)
+      request = Net::HTTP.const_get(type).new(url)
       request.content_type = CONTENT_TYPE
       request
     end
@@ -130,13 +160,13 @@ module Seko
       parse_response(response.body)
     end
 
-    def get
-      request = build_request('Get')
+    def get(url = request_uri)
+      request = build_request('Get', url)
       request(request)
     end
 
-    def post(json_request)
-      request      = build_request('Post')
+    def post(json_request, url = request_uri)
+      request      = build_request('Post', url)
       request.body = json_request.to_json
       request(request)
     end

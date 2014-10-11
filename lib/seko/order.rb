@@ -1,6 +1,15 @@
 module Seko
   class Order
 
+    CANCEL_CODES = {
+      '001' => 'Customer Request',
+      '002' => 'Order Delayed',
+      '003' => 'Duplicate',
+      '004' => 'Item not available',
+      '005' => 'Cannot ship to address',
+      '006' => 'Other'
+    }
+
     def self.websubmit(attributes)
       format(attributes, "Web")
     end

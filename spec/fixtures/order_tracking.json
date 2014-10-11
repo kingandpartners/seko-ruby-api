@@ -1,0 +1,12 @@
+{
+  "Response": {
+    "CallStatus": {
+      "Code": 0,
+      "Message": {},
+      "Success": true
+    },
+    "Courier": {},
+    "GUID": "f66fd245-7b9e-4fd2-9dbf-5631edc875d9",
+    "TrackingNumber": {}
+  }
+}

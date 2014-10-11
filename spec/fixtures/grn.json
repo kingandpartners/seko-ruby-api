@@ -1,0 +1,45 @@
+{
+  "Response": {
+    "CallStatus": {
+      "Code":0, 
+      "Message":{}, 
+      "Success":true
+    }, 
+    "List": { 
+      "GRNResponseItem": [
+        {
+          "ArrivalTimestamp": "2014-10-10T15:45:12Z", 
+          "ConfirmedTimestamp": "2014-10-10T15:45:54Z", 
+          "CurrentStatus": "Confirmed", 
+          "DCCode": {}, 
+          "GRNQuantity": 10, 
+          "GRNType": {}, 
+          "GUID": "5b2dcd8e-52c3-4e27-a712-eaacda2dd8fe", 
+          "HBRef": {}, 
+          "InternalId": {}, 
+          "LineInternalId": {}, 
+          "LineItemGUID": "9213df2b-8191-4c24-a687-8d7d3dca40bb", 
+          "LineItemNumber": 1, 
+          "ProductCode": {}, 
+          "ReceivingStartTimestamp": "2014-10-10T15:45:27Z"
+        }, 
+        {
+          "ArrivalTimestamp": "2014-10-10T15:45:12Z", 
+          "ConfirmedTimestamp": "2014-10-10T15:45:54Z", 
+          "CurrentStatus": "Confirmed", 
+          "DCCode": {}, 
+          "GRNQuantity": 10, 
+          "GRNType": {}, 
+          "GUID": "5b2dcd8e-52c3-4e27-a712-eaacda2dd8fe", 
+          "HBRef": {}, 
+          "InternalId": {}, 
+          "LineInternalId": {}, 
+          "LineItemGUID": "8359e44d-40eb-4db5-92ed-5998304d8a3b", 
+          "LineItemNumber": 2, 
+          "ProductCode": {}, 
+          "ReceivingStartTimestamp": "2014-10-10T15:45:27Z"
+        }
+      ]
+    }
+  }
+}

@@ -126,6 +126,81 @@ describe Seko::Client do
     end
   end
 
+  describe '#check_grn' do
+    let(:guid) { '5b2dcd8e-52c3-4e27-a712-eaacda2dd8fe' }
+    let(:response) { client.check_grn(guid) }
+
+    before do
+      stub_get("grns/v1/#{guid}.json").with(query: {token: token}).
+        to_return(body: fixture(:grn).to_json, headers: json_headers)
+    end
+
+    it 'gets a GRN response' do
+      expect(response.success?).to eq(true)
+    end
+
+  end
+
+  describe '#order_status' do
+    let(:guid) { 'f66fd245-7b9e-4fd2-9dbf-5631edc875d9' }
+    let(:response) { client.order_status(guid) }
+
+    before do
+      stub_get("salesorders/v1/#{guid}/status.json").with(query: {token: token}).
+        to_return(body: fixture(:order_status).to_json, headers: json_headers)
+    end
+
+    it "gets an order's status" do
+      expect(response.success?).to eq(true)
+    end
+  end
+
+  describe '#order_tracking' do
+    let(:guid) { 'f66fd245-7b9e-4fd2-9dbf-5631edc875d9' }
+    let(:response) { client.order_tracking(guid) }
+
+    before do
+      stub_get("salesorders/v1/#{guid}/tracking.json").with(query: {token: token}).
+        to_return(body: fixture(:order_tracking).to_json, headers: json_headers)
+    end
+
+    it "gets an order's status" do
+      expect(response.success?).to eq(true)
+    end
+  end
+
+  describe '#stock_adjustments' do
+    let(:from)      { '2013-10-31T00:00:00Z' }
+    let(:to)        { '2014-10-31T00:00:00Z' }
+    let(:warehouse) { 'DC123' }
+    let(:response)  { client.stock_adjustments(from, to, warehouse) }
+
+    before do
+      stub_get("stock/v1/adjustment/#{from}/#{to}.json").with(query: {token: token, dc: warehouse}).
+        to_return(body: fixture(:stock_adjustment).to_json, headers: json_headers)
+    end
+
+    it "gets stock adjustments in timeframe" do
+      expect(response.success?).to eq(true)
+    end
+  end
+
+  describe '#stock_movements' do
+    let(:from)      { '2013-10-31T00:00:00Z' }
+    let(:to)        { '2014-10-31T00:00:00Z' }
+    let(:warehouse) { 'DC123' }
+    let(:response)  { client.stock_movements(from, to, warehouse) }
+
+    before do
+      stub_get("stock/v1/movement/#{from}/#{to}.json").with(query: {token: token, dc: warehouse}).
+        to_return(body: fixture(:stock_movement).to_json, headers: json_headers)
+    end
+
+    it "gets stock movements in timeframe" do
+      expect(response.success?).to eq(true)
+    end
+  end
+
   describe '#request_uri' do
     it 'builds the request URI' do
       expect(client).to receive(:host).and_return('test.com/')

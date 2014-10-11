@@ -8,18 +8,18 @@ Ruby wrapper for Seko Logistics' SupplyStream iHub REST API v1
 
 [SupplyStream REST API Documentation](https://wiki.supplystream.com/GetFile.aspx?Page=MANUAL.Integration-Hub-Rest-APIs&File=integration-ihub-rest-apis-v1.4.pdf)
 
-## Possible Integrations
+## Integrations
 
 1.  **Inbound Product Master Upload and method**
 2.  **Inbound Companies Upload and method**
 3.  **Inbound Advanced Shipment Notification**
 4.  **Inbound Sales Order**
-5.  Retrieve GRN’s
+5.  **Retrieve GRN’s**
 6.  **Retrieve Stock Quantity**
-7.  Retrieve Tracking Details
-8.  Retrieve Sales Order Status
-9.  Retrieve Stock Adjustments
-10. Retrieve Stock Movements
+7.  **Retrieve Tracking Details**
+8.  **Retrieve Sales Order Status**
+9.  **Retrieve Stock Adjustments**
+10. **Retrieve Stock Movements**
 
 ## Process
 
@@ -58,7 +58,11 @@ config/initializers/seko.rb
 Seko.configure(
   supplier_code:        'DEFSUPLJLTD001',
   supplier_description: 'Default Supplier LARSSON & JENNINGS LTD',
-  supplier_uom:         1
+  supplier_uom:         1,
+  warehouses: {
+    us: 'US123',
+    uk: 'UK123'
+  }
 )
 ```
 
@@ -81,8 +85,42 @@ response   = client.submit_receipt(line_item_array, warehouse)
 #### Get Stock
 
 ```ruby
-client     = Seko::Client.new("token")
-response   = client.get_inventory
+client   = Seko::Client.new("token")
+response = client.get_inventory
+```
+
+#### Check GRN
+
+```ruby
+client   = Seko::Client.new("token")
+response = client.check_grn('5b2dcd8e-52c3-4e27-a712-eaacda2dd8fe')
+```
+
+#### Order status
+
+```ruby
+client   = Seko::Client.new("token")
+response = client.order_status('5b2dcd8e-52c3-4e27-a712-eaacda2dd8fe')
+```
+
+#### Stock movements
+
+```ruby
+client    = Seko::Client.new("token")
+warehouse = 'DC123'
+from      = 3.days.ago.strftime('%F')
+to        = Time.now.strftime('%F')
+response  = client.stock_movements(from, to, warehouse)
+```
+
+#### Stock adjustments
+
+```ruby
+client    = Seko::Client.new("token")
+warehouse = 'DC123'
+from      = 3.days.ago.strftime('%F')
+to        = Time.now.strftime('%F')
+response  = client.stock_adjustments(from, to, warehouse)
 ```
 
 #### Submit Order
