@@ -82,6 +82,17 @@ client     = Seko::Client.new("token")
 response   = client.submit_receipt(line_item_array, warehouse)
 ```
 
+#### Submit Company
+
+```ruby
+company_hash = {
+  code:        'IND001',
+  description: 'Indigina'
+}
+client     = Seko::Client.new("token")
+response   = client.submit_company(company_hash)
+```
+
 #### Get Stock
 
 ```ruby
@@ -96,14 +107,21 @@ client   = Seko::Client.new("token")
 response = client.check_grn('5b2dcd8e-52c3-4e27-a712-eaacda2dd8fe')
 ```
 
-#### Order status
+#### Order Status
 
 ```ruby
 client   = Seko::Client.new("token")
 response = client.order_status('5b2dcd8e-52c3-4e27-a712-eaacda2dd8fe')
 ```
 
-#### Stock movements
+#### Order Tracking
+
+```ruby
+client   = Seko::Client.new("token")
+response = client.order_tracking('5b2dcd8e-52c3-4e27-a712-eaacda2dd8fe')
+```
+
+#### Stock Movements
 
 ```ruby
 client    = Seko::Client.new("token")
@@ -113,7 +131,7 @@ to        = Time.now.strftime('%F')
 response  = client.stock_movements(from, to, warehouse)
 ```
 
-#### Stock adjustments
+#### Stock Adjustments
 
 ```ruby
 client    = Seko::Client.new("token")
