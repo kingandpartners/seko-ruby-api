@@ -121,6 +121,23 @@ client   = Seko::Client.new("token")
 response = client.order_tracking('5b2dcd8e-52c3-4e27-a712-eaacda2dd8fe')
 ```
 
+#### Cancel Order
+
+```ruby
+Seko::Order::CANCEL_CODES
+# => {
+#      "001" => "Customer Request", 
+#      "002" => "Order Delayed", 
+#      "003" => "Duplicate", 
+#      "004" => "Item not available", 
+#      "005" => "Cannot ship to address", 
+#      "006" => "Other"
+#    }
+
+client   = Seko::Client.new("token")
+response = client.cancel_order('5b2dcd8e-52c3-4e27-a712-eaacda2dd8fe', '001')
+```
+
 #### Stock Movements
 
 ```ruby
@@ -190,6 +207,10 @@ order = {
 
 client   = Seko::Client.new("token")
 response = client.send_order_request(order)
+
+### NOTE you may want to store the GUID from the response
+### you need the guid for status updates, tracking, and canceling orders
+response.guid
 
 if response.success?
   # DO SOMETHING

@@ -1,9 +1,10 @@
 require 'spec_helper'
 describe Seko::Response do
 
+  let(:guid)             { 'f66fd245-7b9e-4fd2-9dbf-5631edc875d9' }
   let(:failed_response)  { "{\n \"CallStatus\": {\n \"Success\": false, \"Message\": \"Failed!\" } }" }
-  let(:errant_raw)       { "{\n \"CallStatus\": {\n \"Success\": true, \"Message\": {} } }" }
-  let(:raw_response)     { "{\"Response\": #{errant_raw} }" }
+  let(:errant_raw)       { "{\n \"CallStatus\": {\n \"Success\": true, \"Message\": {} }, \"GUID\": \"#{guid}\" }" }
+  let(:raw_response)     { "{\"Response\": #{errant_raw}}" }
   let(:parsed_response)  { JSON.parse(raw_response) }
   let(:response)         { Seko::Response.new(raw_response) }
   let(:errant_response)  { Seko::Response.new(errant_raw) }
@@ -40,6 +41,12 @@ describe Seko::Response do
     it 'returns the message of the repsonse' do
       expect(failure_response.message).to eq('Failed!')
       expect(response.message).to eq('')
+    end
+  end
+
+  describe '#guid' do
+    it 'returns the GUID from the response' do
+      expect(response.guid).to eq(guid)
     end
   end
 

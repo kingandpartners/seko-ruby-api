@@ -98,6 +98,12 @@ module Seko
       get
     end
 
+    def cancel_order(guid, reason_code)
+      @service  = 'salesorders'
+      @endpoint = "#{guid}/cancel/reasoncode/#{reason_code}"
+      post({'Cancel' => 'Order'})
+    end
+
     def stock_adjustments(from, to, warehouse)
       @service  = 'stock'
       @endpoint = "adjustment/#{from}/#{to}"

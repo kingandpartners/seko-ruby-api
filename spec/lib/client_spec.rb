@@ -169,6 +169,20 @@ describe Seko::Client do
     end
   end
 
+  describe '#cancel_order' do
+    let(:guid) { 'f66fd245-7b9e-4fd2-9dbf-5631edc875d9' }
+    let(:response) { client.cancel_order(guid, '001') }
+
+    before do
+      stub_post("salesorders/v1/#{guid}/cancel/reasoncode/001.json").with(query: {token: token}).
+        to_return(body: success_response.to_json, headers: json_headers)
+    end
+
+    it "gets an order's status" do
+      expect(response.success?).to eq(true)
+    end
+  end
+
   describe '#stock_adjustments' do
     let(:from)      { '2013-10-31T00:00:00Z' }
     let(:to)        { '2014-10-31T00:00:00Z' }

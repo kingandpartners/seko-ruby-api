@@ -25,5 +25,9 @@ module Seko
       message.empty? ? "" : message
     end
 
+    def guid
+      root_response["GUID"]
+    end
+
   end
 end
