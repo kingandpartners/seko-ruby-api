@@ -76,7 +76,7 @@ response = client.submit_product(upc: "123456", description: 'A test product')
 #### Submit Receipt
 
 ```ruby
-line_item_array = [ { id: 1, upc: "123456", quantity: 10 } ]
+line_items = [ { upc: "123456", quantity: 10 } ]
 warehouse  = Seko.config[:warehouses][:us]
 client     = Seko::Client.new("token")
 response   = client.submit_receipt(line_item_array, warehouse)
@@ -162,47 +162,27 @@ response  = client.stock_adjustments(from, to, warehouse)
 
 ```ruby
 order = {
-  carrier: "FEDEX",
-  billing_address:  { 
-    first_name: "John",
-    last_name:  "Smith",
-    address1:   "123 Here Now",
-    address2:   "2nd Floor",
-    address3:   "",
-    city:       "New York",
-    state:      "New York",
-    country:    "US",
-    zipcode:    "10012",
-    phone:      "123-123-1234"
-  },
   shipping_address: {
     first_name: "John",
     last_name:  "Smith",
     address1:   "123 Here Now",
     address2:   "2nd Floor",
-    address3:   "",
     city:       "New York",
     state:      "New York",
     country:    "US",
     zipcode:    "10012",
     phone:      "123-123-1234"
   },
-  gift_wrap:    "true",
-  gift_message: "Happy Birthday!",
   email:        "someone@somehwere.com",
   number:       "R123123123",
-  type:         "OO",
   warehouse:    "DC123",
+  date:         "2013-12-12",
   line_items: [
     {
-      price:    "127.23",
       quantity: "1",
-      sku:      "123332211",
-      size:     "XS"
+      sku:      "123332211"
     }
-  ],
-  shipping_code: "90",
-  invoice_url:   "http://example.com/R123123123/invoice"
+  ]
 }
 
 client   = Seko::Client.new("token")
