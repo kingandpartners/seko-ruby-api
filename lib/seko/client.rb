@@ -21,7 +21,7 @@ module Seko
       raise "Token is required" unless token
 
       @token   = token
-      @options = default_options.merge!(options)
+      @options = default_options.merge(options)
     end
 
     def send_order_request(order_hash)
@@ -30,9 +30,13 @@ module Seko
       post(Order.websubmit(order_hash))
     end
 
-    def get_inventory
+    def get_inventory(warehouse = nil)
       @service  = 'stock'
-      @endpoint = 'all'
+      @endpoint = if warehouse.nil?
+        "all"
+      else 
+        "dc/#{warehouse}"
+      end
       inventory_response
     end
 

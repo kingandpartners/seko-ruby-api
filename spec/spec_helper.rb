@@ -74,7 +74,8 @@ def configuration
     supplier_code:        'Supplier1', 
     supplier_description: 'My Supplier', 
     supplier_uom:         1,
-    warehouses:           {}
+    warehouses:           {},
+    token: 'token123'
   }
 end
 

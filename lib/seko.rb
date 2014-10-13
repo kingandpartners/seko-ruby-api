@@ -10,6 +10,7 @@ require 'seko/company'
 module Seko
 
   @config = {
+    token: '',
     supplier_code: '',
     supplier_description: '',
     supplier_uom: 1,

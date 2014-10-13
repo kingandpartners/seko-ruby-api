@@ -2,9 +2,9 @@ module Seko
   class Receipt
 
     def self.line_items(items)
-      items.map do |item|
+      items.map.collect.with_index do |item, index|
         {
-          "LineNumber"  => item[:id],
+          "LineNumber"  => index + 1,
           "ProductCode" => item[:upc],
           "Quantity"    => item[:quantity],
           "SupplierCompanyCode" => Seko.config[:supplier_code]
