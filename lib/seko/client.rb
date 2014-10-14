@@ -30,19 +30,38 @@ module Seko
       post(Order.websubmit(order_hash))
     end
 
+    # FIXME: use this method once SS fixes their API
+    # for now we are manually sorting the distribution centre
+    # see #inventory_response below
+    #
+    # def get_inventory(warehouse = nil)
+    #   @service  = 'stock'
+    #   @endpoint = if warehouse.nil?
+    #     "all"
+    #   else 
+    #     "dc/#{warehouse}"
+    #   end
+    #   inventory_response
+    # end
+    #
+    # def inventory_response
+    #   response = get
+    #   response.parsed = map_results(Stock.parse(response))
+    #   response
+    # end
+
     def get_inventory(warehouse = nil)
       @service  = 'stock'
-      @endpoint = if warehouse.nil?
-        "all"
-      else 
-        "dc/#{warehouse}"
-      end
-      inventory_response
+      @endpoint = 'all'
+      inventory_response(warehouse)
     end
 
-    def inventory_response
+
+    def inventory_response(warehouse = nil)
       response = get
-      response.parsed = map_results(Stock.parse(response))
+      response.parsed = map_results(Stock.parse(response)).select do |stock|
+        warehouse.nil? ? true : stock["DCCode"] == warehouse
+      end
       response
     end
 
