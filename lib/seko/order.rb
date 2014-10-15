@@ -23,7 +23,7 @@ module Seko
     def self.format(order, order_prefix = nil)
       {
         "Request" => {
-          "DeliveryDetails"      => address(order[:address], order[:email]),
+          "DeliveryDetails"      => address(order[:shipping_address], order[:email]),
           "List" => {
             "SalesOrderLineItem" => line_items(order[:line_items])
           },

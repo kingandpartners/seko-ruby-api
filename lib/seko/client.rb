@@ -30,6 +30,10 @@ module Seko
       post(Order.websubmit(order_hash))
     end
 
+    def order_request(order_hash)
+      Order.websubmit(order_hash).to_json
+    end
+
     # FIXME: use this method once SS fixes their API
     # for now we are manually sorting the distribution centre
     # see #inventory_response below

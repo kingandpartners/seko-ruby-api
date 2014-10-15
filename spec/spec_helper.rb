@@ -110,12 +110,12 @@ end
 
 def order_hash
   {
-    number:     123456,
-    email:      'stephen.jones@gmail.com',
-    address:    address_hash,
-    line_items: line_items_array,
-    warehouse:  'DC123',
-    date:       '2013-12-12'
+    number:           123456,
+    email:            'stephen.jones@gmail.com',
+    shipping_address: address_hash,
+    line_items:       line_items_array,
+    warehouse:        'DC123',
+    date:             '2013-12-12'
   }
 end
 
