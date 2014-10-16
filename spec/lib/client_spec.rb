@@ -27,6 +27,14 @@ describe Seko::Client do
     end
   end
 
+  describe '#order_request' do
+    let(:expected_result) { fixture(:order_websubmit).to_json }
+
+    it 'formats the ruby hash response to a json object' do
+      expect(client.order_request(order_hash)).to eq(expected_result)
+    end
+  end
+
   describe 'inventory methods' do
     before do
       stub_get("stock/v1/all.json").with(query: {token: token}).
@@ -187,7 +195,7 @@ describe Seko::Client do
     let(:from)      { '2013-10-31T00:00:00Z' }
     let(:to)        { '2014-10-31T00:00:00Z' }
     let(:warehouse) { 'DC123' }
-    let(:response)  { client.stock_adjustments(from, to, warehouse) }
+    let(:response)  { client.stock_adjustments(Date.parse(from), Date.parse(to), warehouse) }
 
     before do
       stub_get("stock/v1/adjustment/#{from}/#{to}.json").with(query: {token: token, dc: warehouse}).
@@ -203,7 +211,7 @@ describe Seko::Client do
     let(:from)      { '2013-10-31T00:00:00Z' }
     let(:to)        { '2014-10-31T00:00:00Z' }
     let(:warehouse) { 'DC123' }
-    let(:response)  { client.stock_movements(from, to, warehouse) }
+    let(:response)  { client.stock_movements(Date.parse(from), Date.parse(to), warehouse) }
 
     before do
       stub_get("stock/v1/movement/#{from}/#{to}.json").with(query: {token: token, dc: warehouse}).
@@ -219,7 +227,7 @@ describe Seko::Client do
     let(:from)      { '2013-10-31T00:00:00Z' }
     let(:to)        { '2014-10-31T00:00:00Z' }
     let(:warehouse) { 'DC123' }
-    let(:response)  { client.dispatch_statuses(from, to, warehouse) }
+    let(:response)  { client.dispatch_statuses(Date.parse(from), Date.parse(to), warehouse) }
 
     before do
       stub_get("dispatches/v1/status/#{from}/#{to}.json").with(query: {token: token, dc: warehouse, status: 'Dispatched'}).
@@ -337,6 +345,18 @@ describe Seko::Client do
       it 'parses response into a Seko::Response object' do
         expect(client.send(:parse_response, json_response)).to be_a(Seko::Response)
       end
+    end
+
+    describe '#format_from_to' do
+
+      let(:from)            { '2013-10-31T00:00:00Z' }
+      let(:to)              { '2014-10-31T00:00:00Z' }
+      let(:expected_result) { "#{from}/#{to}" }
+
+      it 'returns a url ready from / to string' do
+        expect(client.send(:format_from_to, Date.parse(from), Date.parse(to))).to eq(expected_result)
+      end
+
     end
 
   end

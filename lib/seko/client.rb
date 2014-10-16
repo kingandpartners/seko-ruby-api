@@ -133,19 +133,19 @@ module Seko
 
     def stock_adjustments(from, to, warehouse)
       @service  = 'stock'
-      @endpoint = "adjustment/#{from}/#{to}"
+      @endpoint = "adjustment/#{format_from_to(from, to)}"
       get("#{request_uri}&dc=#{warehouse}")
     end
 
     def stock_movements(from, to, warehouse)
       @service  = 'stock'
-      @endpoint = "movement/#{from}/#{to}"
+      @endpoint = "movement/#{format_from_to(from, to)}"
       get("#{request_uri}&dc=#{warehouse}")
     end
 
     def dispatch_statuses(from, to, warehouse)
       @service  = 'dispatches'
-      @endpoint = "status/#{from}/#{to}"
+      @endpoint = "status/#{format_from_to(from, to)}"
       get("#{request_uri}&dc=#{warehouse}&status=Dispatched")
     end
 
@@ -213,6 +213,10 @@ module Seko
     def parse_response(json_response)
       log(json_response)
       @response = Response.new(json_response)
+    end
+
+    def format_from_to(from, to)
+      "#{from.strftime('%F')}T00:00:00Z/#{to.strftime('%F')}T00:00:00Z"
     end
 
   end

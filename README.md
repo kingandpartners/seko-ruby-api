@@ -143,8 +143,8 @@ response = client.cancel_order('5b2dcd8e-52c3-4e27-a712-eaacda2dd8fe', '001')
 ```ruby
 client    = Seko::Client.new("token")
 warehouse = Seko.config[:warehouses][:us]
-from      = 3.days.ago.strftime('%F')
-to        = Time.now.strftime('%F')
+from      = 3.days.ago
+to        = Time.now
 response  = client.stock_movements(from, to, warehouse)
 ```
 
@@ -153,8 +153,18 @@ response  = client.stock_movements(from, to, warehouse)
 ```ruby
 client    = Seko::Client.new("token")
 warehouse = Seko.config[:warehouses][:us]
-from      = 3.days.ago.strftime('%F')
-to        = Time.now.strftime('%F')
+from      = 3.days.ago
+to        = Time.now
+response  = client.stock_adjustments(from, to, warehouse)
+```
+
+#### Dispatch Statuses
+
+```ruby
+client    = Seko::Client.new("token")
+warehouse = Seko.config[:warehouses][:us]
+from      = 3.days.ago
+to        = Time.now
 response  = client.stock_adjustments(from, to, warehouse)
 ```
 
