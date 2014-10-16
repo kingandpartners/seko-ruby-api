@@ -6,6 +6,7 @@ require 'seko/receipt'
 require 'seko/stock'
 require 'seko/order'
 require 'seko/company'
+require 'seko/dispatch'
 
 module Seko
 
