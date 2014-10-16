@@ -158,8 +158,12 @@ def silence_output
   @original_stdout = $stdout
 
   # Redirect stderr and stdout
-  $stderr = File.new(File.join(File.dirname(__FILE__), 'logs', 'spec.log'), 'w')
-  $stdout = File.new(File.join(File.dirname(__FILE__), 'logs', 'spec.log'), 'w')
+  $stderr = File.new(log_file, 'w')
+  $stdout = File.new(log_file, 'w')
+end
+
+def log_file
+  File.join(File.dirname(__FILE__), 'logs', 'spec.log')
 end
 
 # Replace stderr and stdout so anything else is output correctly
@@ -168,4 +172,5 @@ def enable_output
   $stdout = @original_stdout
   @original_stderr = nil
   @original_stdout = nil
+  `rm #{log_file} && touch #{log_file}`
 end
