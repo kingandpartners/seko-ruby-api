@@ -162,10 +162,10 @@ response  = client.stock_adjustments(from, to, warehouse)
 
 ```ruby
 client    = Seko::Client.new("token")
-warehouse = Seko.config[:warehouses][:us]
+warehouse = Seko.config[:warehouses][:us] # warehouse is optional
 from      = 3.days.ago
 to        = Time.now
-response  = client.stock_adjustments(from, to, warehouse)
+response  = client.dispatch_statuses(from, to, warehouse)
 ```
 
 #### Submit Order
