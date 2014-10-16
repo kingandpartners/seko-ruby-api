@@ -1,0 +1,25 @@
+{
+  "Response": {
+    "CallStatus": {
+      "Code": 0,
+      "Message": {},
+      "Success": true
+    },
+    "List": {
+      "DispatchLineItem": [
+        {
+          "DCCode": "DCSOM01",
+          "GUID": "2b5e52cc-fb6f-4ea4-b8cf-cf64e3a2b8db"
+        },
+        {
+          "DCCode": "DCSOM01",
+          "GUID": "93e92ca2-725a-46f8-90dd-43a16105f78d"
+        },
+        {
+          "DCCode": "DCSOM01",
+          "GUID": "143544ec-f396-4155-95c6-bf59898e0830"
+        }
+      ]
+    }
+  }
+}

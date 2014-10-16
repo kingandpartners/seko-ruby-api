@@ -143,6 +143,12 @@ module Seko
       get("#{request_uri}&dc=#{warehouse}")
     end
 
+    def dispatch_statuses(from, to, warehouse)
+      @service  = 'dispatches'
+      @endpoint = "status/#{from}/#{to}"
+      get("#{request_uri}&dc=#{warehouse}&status=Dispatched")
+    end
+
     def request_uri
       "https://#{host}#{path}?token=#{token}"
     end

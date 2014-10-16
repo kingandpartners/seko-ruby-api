@@ -215,6 +215,22 @@ describe Seko::Client do
     end
   end
 
+  describe '#dispatch_statuses' do
+    let(:from)      { '2013-10-31T00:00:00Z' }
+    let(:to)        { '2014-10-31T00:00:00Z' }
+    let(:warehouse) { 'DC123' }
+    let(:response)  { client.dispatch_statuses(from, to, warehouse) }
+
+    before do
+      stub_get("dispatches/v1/status/#{from}/#{to}.json").with(query: {token: token, dc: warehouse, status: 'Dispatched'}).
+        to_return(body: fixture(:dispatch_statuses).to_json, headers: json_headers)
+    end
+
+    it "gets dispatch statuses in timeframe" do
+      expect(response.success?).to eq(true)
+    end
+  end
+
   describe '#request_uri' do
     it 'builds the request URI' do
       expect(client).to receive(:host).and_return('test.com/')

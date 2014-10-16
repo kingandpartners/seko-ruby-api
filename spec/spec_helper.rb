@@ -12,6 +12,8 @@ WebMock.disable_net_connect!(:allow => "codeclimate.com")
 
 RSpec.configure do |config|
   config.include WebMock::API
+  config.before(:all, &:silence_output)
+  config.after(:all,  &:enable_output)
 end
 
 def read_json(type)
@@ -145,4 +147,25 @@ end
 
 def fake_response
   Hashie::Mash.new({body: {test: true}.to_json})
+end
+
+
+public
+# Redirects stderr and stout to /log/spec.log
+def silence_output
+  # Store the original stderr and stdout in order to restore them later
+  @original_stderr = $stderr
+  @original_stdout = $stdout
+
+  # Redirect stderr and stdout
+  $stderr = File.new(File.join(File.dirname(__FILE__), 'logs', 'spec.log'), 'w')
+  $stdout = File.new(File.join(File.dirname(__FILE__), 'logs', 'spec.log'), 'w')
+end
+
+# Replace stderr and stdout so anything else is output correctly
+def enable_output
+  $stderr = @original_stderr
+  $stdout = @original_stdout
+  @original_stderr = nil
+  @original_stdout = nil
 end
