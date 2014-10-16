@@ -56,6 +56,7 @@ Or install it yourself as:
 config/initializers/seko.rb
 ```ruby
 Seko.configure(
+  token:                'SekoAPIToKeN'
   supplier_code:        'DEFSUPLJLTD001',
   supplier_description: 'Default Supplier LARSSON & JENNINGS LTD',
   supplier_uom:         1,
@@ -69,7 +70,7 @@ Seko.configure(
 #### Submit Product
 
 ```ruby
-client   = Seko::Client.new("token")
+client   = Seko::Client.new(Seko.config[:token])
 response = client.submit_product(upc: "123456", description: 'A test product')
 ```
 
@@ -78,7 +79,7 @@ response = client.submit_product(upc: "123456", description: 'A test product')
 ```ruby
 line_items = [ { upc: "123456", quantity: 10 } ]
 warehouse  = Seko.config[:warehouses][:us]
-client     = Seko::Client.new("token")
+client     = Seko::Client.new(Seko.config[:token])
 response   = client.submit_receipt(line_item_array, warehouse)
 ```
 
@@ -89,35 +90,35 @@ company_hash = {
   code:        'IND001',
   description: 'Indigina'
 }
-client     = Seko::Client.new("token")
+client     = Seko::Client.new(Seko.config[:token])
 response   = client.submit_company(company_hash)
 ```
 
 #### Get Stock
 
 ```ruby
-client   = Seko::Client.new("token")
+client   = Seko::Client.new(Seko.config[:token])
 response = client.get_inventory
 ```
 
 #### Check GRN
 
 ```ruby
-client   = Seko::Client.new("token")
+client   = Seko::Client.new(Seko.config[:token])
 response = client.check_grn('5b2dcd8e-52c3-4e27-a712-eaacda2dd8fe')
 ```
 
 #### Order Status
 
 ```ruby
-client   = Seko::Client.new("token")
+client   = Seko::Client.new(Seko.config[:token])
 response = client.order_status('5b2dcd8e-52c3-4e27-a712-eaacda2dd8fe')
 ```
 
 #### Order Tracking
 
 ```ruby
-client   = Seko::Client.new("token")
+client   = Seko::Client.new(Seko.config[:token])
 response = client.order_tracking('5b2dcd8e-52c3-4e27-a712-eaacda2dd8fe')
 ```
 
@@ -134,14 +135,14 @@ Seko::Order::CANCEL_CODES
 #      "006" => "Other"
 #    }
 
-client   = Seko::Client.new("token")
+client   = Seko::Client.new(Seko.config[:token])
 response = client.cancel_order('5b2dcd8e-52c3-4e27-a712-eaacda2dd8fe', '001')
 ```
 
 #### Stock Movements
 
 ```ruby
-client    = Seko::Client.new("token")
+client    = Seko::Client.new(Seko.config[:token])
 warehouse = Seko.config[:warehouses][:us]
 from      = 3.days.ago
 to        = Time.now
@@ -151,7 +152,7 @@ response  = client.stock_movements(from, to, warehouse)
 #### Stock Adjustments
 
 ```ruby
-client    = Seko::Client.new("token")
+client    = Seko::Client.new(Seko.config[:token])
 warehouse = Seko.config[:warehouses][:us]
 from      = 3.days.ago
 to        = Time.now
@@ -161,11 +162,16 @@ response  = client.stock_adjustments(from, to, warehouse)
 #### Dispatch Statuses
 
 ```ruby
-client    = Seko::Client.new("token")
+client    = Seko::Client.new(Seko.config[:token])
 warehouse = Seko.config[:warehouses][:us] # warehouse is optional
 from      = 3.days.ago
 to        = Time.now
 response  = client.dispatch_statuses(from, to, warehouse)
+
+# get collection of GUIDs dispatched
+guid_array = Seko::Dispatch.parse(response)
+# returns something like this
+# => ["2b5e52cc-fb6f-4ea4-b8cf-cf64e3a2b8db", "93e92ca2-725a-46f8-90dd-43a16105f78d"]
 ```
 
 #### Submit Order
@@ -195,7 +201,7 @@ order = {
   ]
 }
 
-client   = Seko::Client.new("token")
+client   = Seko::Client.new(Seko.config[:token])
 response = client.send_order_request(order)
 
 ### NOTE you may want to store the GUID from the response
