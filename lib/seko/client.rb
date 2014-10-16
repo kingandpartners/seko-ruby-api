@@ -143,10 +143,12 @@ module Seko
       get("#{request_uri}&dc=#{warehouse}")
     end
 
-    def dispatch_statuses(from, to, warehouse)
-      @service  = 'dispatches'
-      @endpoint = "status/#{format_from_to(from, to)}"
-      get("#{request_uri}&dc=#{warehouse}&status=Dispatched")
+    def dispatch_statuses(from, to, warehouse = nil)
+      @service     = 'dispatches'
+      @endpoint    = "status/#{format_from_to(from, to)}"
+      request_url  = "#{request_uri}&status=Dispatched"
+      request_url += "&dc=#{warehouse}" unless warehouse.nil?
+      get(request_url)
     end
 
     def request_uri
