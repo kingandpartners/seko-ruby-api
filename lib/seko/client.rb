@@ -162,7 +162,7 @@ module Seko
     private
     def default_options
       { 
-        verbose: true,
+        verbose: false,
         test_mode: true
       }
     end
