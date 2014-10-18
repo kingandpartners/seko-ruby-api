@@ -260,7 +260,7 @@ describe Seko::Client do
 
     describe '#default_options' do
       it 'returns default options' do
-        expect(client.send(:default_options)).to eq({ verbose: true, test_mode: true })
+        expect(client.send(:default_options)).to eq({ verbose: false, test_mode: true })
       end
     end
 
