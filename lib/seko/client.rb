@@ -34,6 +34,16 @@ module Seko
       Order.websubmit(order_hash).to_json
     end
 
+    def send_wholesale_request(order_hash)
+      @service  = 'salesorders'
+      @endpoint = 'submit'
+      post(Order.submit(order_hash))
+    end
+
+    def wholesale_request(order_hash)
+      Order.submit(order_hash).to_json
+    end
+
     # FIXME: use this method once SS fixes their API
     # for now we are manually sorting the distribution centre
     # see #inventory_response below
