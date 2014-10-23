@@ -6,7 +6,8 @@ module Seko
 
     PORT         = 443
     TEST_HOST    = 'hubuat1.supplystream.com'
-    LIVE_HOST    = 'api.supplystream.com'
+    # api.supplystream.com
+    LIVE_HOST    = 'hub.supplystream.com'
     API_PATH     = '/hub/api/'
     API_VERSION  = 'v1'
     CONTENT_TYPE = 'application/json'
