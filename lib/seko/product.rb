@@ -17,7 +17,7 @@ module Seko
           },
           "ProductMaster" => {
             "ProductCode"        => attributes[:upc],
-            "ProductDescription" => attributes[:description]
+            "ProductDescription" => Filter.parse(attributes[:description])
           }
         }
       }
