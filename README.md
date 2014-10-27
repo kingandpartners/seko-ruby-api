@@ -21,20 +21,6 @@ Ruby wrapper for Seko Logistics' SupplyStream iHub REST API v1
 9.  **Retrieve Stock Adjustments**
 10. **Retrieve Stock Movements**
 
-## Process
-
-1.  Sellect or K&P need to load product masters in SS through the UAT Integration Hub or
-2.  Please provide these to me on a CSV file as per the template attached and I will load these using the manual upload function in the UAT integration hub
-3.  Receipts (ASN’s) need to be sent to SS through the UAT Integration Hub or
-4.  I will upload a few lines of the products on the attached template using the manual upload function in the UAT Integration Hub
-5.  I will the create the GRN’s in SS
-6.  Sellect or K&P will then be able to retrieve the GRN’s and Stock Quantities
-7.  Sellect or K&P will then need to send Sales Orders on products that have available Stock
-8.  These can be sent to DCCL01 (UK Warehouse) or DCSOM01 (US Warehouse)
-9.  I will then pick, pack and dispatch the orders in SS
-10. Sellect or K&P can then retrieve sales order status, dispatch status and dispatch (tracking) details
-
-
 ## Installation
 
 Add this line to your application's Gemfile:
