@@ -11,12 +11,16 @@ module Seko
     }
 
     def self.websubmit(attributes)
-      format(attributes, "Web")
+      build_request(attributes, "Web")
     end
 
     def self.submit(attributes)
-      formatted = format(attributes)
-      formatted["Request"].merge!(company(attributes[:company]))
+      build_request(attributes)
+    end
+
+    def self.build_request(attributes, type = nil)
+      formatted = format(attributes, type)
+      formatted["Request"].merge!(company(attributes[:company])) if attributes[:company]
       formatted
     end
 

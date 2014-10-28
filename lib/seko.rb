@@ -8,6 +8,7 @@ require 'seko/order'
 require 'seko/company'
 require 'seko/dispatch'
 require 'seko/filter'
+require 'seko/tracking'
 
 module Seko
 
