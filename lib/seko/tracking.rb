@@ -3,7 +3,7 @@ module Seko
 
     attr_accessor :carrier
 
-    DPD = "https://tracking.dpd.de/cgi-bin/delistrack?pknr=:tracking_number&typ=32&lang=en"
+    DPD = "http://www.dpd.co.uk/apps/tracking/?reference=:tracking_number&postcode=#results"
 
     def initialize(carrier, tracking_number)
       @carrier         = carrier
