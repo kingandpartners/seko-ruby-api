@@ -50,7 +50,7 @@ module Seko
         "Line1"        => address[:address1],
         "Line2"        => address[:address2],
         "PhoneNumber"  => address[:phone],
-        "PostcodeZip"  => address[:zipcode]
+        "PostcodeZip"  => address[:zipcode].empty? ? '-----' : address[:zipcode]
       }
     end
 
