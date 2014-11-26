@@ -43,7 +43,7 @@ describe Seko::Order do
 
     it 'returns JSON format ready line items array' do
       expected_result = fixture(:order_websubmit)["Request"]["List"]["SalesOrderLineItem"]
-      expect(Seko::Order.line_items(line_items_array)).to eq(expected_result)
+      expect(Seko::Order.line_items(order_hash)).to eq(expected_result)
     end
 
   end

@@ -118,7 +118,8 @@ def order_hash
     shipping_address: address_hash,
     line_items:       line_items_array,
     warehouse:        'DC123',
-    date:             '2013-12-12'
+    date:             '2013-12-12',
+    currency:         'gbp'
   }
 end
 

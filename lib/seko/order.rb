@@ -27,14 +27,14 @@ module Seko
     def self.format(order, order_prefix = nil)
       {
         "Request" => {
-          "DeliveryDetails"      => address(order[:shipping_address], order[:email]),
+          "DeliveryDetails" => address(order[:shipping_address], order[:email]),
           "List" => {
-            "SalesOrderLineItem" => line_items(order[:line_items])
+            "SalesOrderLineItem" => line_items(order)
           },
           "SalesOrderHeader" => { "DCCode" => order[:warehouse] },
           "#{order_prefix}SalesOrder" => {
-            "SalesOrderDate"     => order[:date],
-            "SalesOrderNumber"   => order[:number]
+            "SalesOrderDate"   => order[:date],
+            "SalesOrderNumber" => order[:number]
           }
         }
       }
@@ -54,13 +54,15 @@ module Seko
       }
     end
 
-    def self.line_items(items)
-      items.collect.with_index do |line_item, index|
+    def self.line_items(order)
+      order[:line_items].collect.with_index do |line_item, index|
         {
-          "LineNumber"  => index + 1,
-          "ProductCode" => line_item[:sku],
-          "Quantity"    => line_item[:quantity],
-          "UnitPrice"   => line_item[:price]
+          "LineNumber"   => index + 1,
+          "ProductCode"  => line_item[:sku],
+          "Quantity"     => line_item[:quantity],
+          "UnitPrice"    => line_item[:price],
+          "CurrencyCode" => order[:currency],
+          "VAT"          => line_item[:vat] || 0
         }
       end
     end

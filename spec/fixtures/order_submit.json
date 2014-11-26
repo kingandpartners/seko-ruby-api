@@ -17,7 +17,9 @@
           "LineNumber": 1,
           "ProductCode": 100083,
           "Quantity": 2,
-          "UnitPrice": 30.00
+          "UnitPrice": 30.00,
+          "CurrencyCode": "gbp",
+          "VAT": 0
         }
       ]
     },

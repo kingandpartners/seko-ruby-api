@@ -51,11 +51,7 @@ module Seko
     #
     # def get_inventory(warehouse = nil)
     #   @service  = 'stock'
-    #   @endpoint = if warehouse.nil?
-    #     "all"
-    #   else 
-    #     "dc/#{warehouse}"
-    #   end
+    #   @endpoint = warehouse.nil? ? "all" : "dc/#{warehouse}"
     #   inventory_response
     # end
     #
