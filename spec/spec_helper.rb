@@ -98,7 +98,8 @@ def line_items_array
   [
     {
       sku:      100083,
-      quantity: 2
+      quantity: 2,
+      price:    30.00
     }
   ]
 end

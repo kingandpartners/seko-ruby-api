@@ -59,7 +59,8 @@ module Seko
         {
           "LineNumber"  => index + 1,
           "ProductCode" => line_item[:sku],
-          "Quantity"    => line_item[:quantity]
+          "Quantity"    => line_item[:quantity],
+          "UnitPrice"   => line_item[:price]
         }
       end
     end
