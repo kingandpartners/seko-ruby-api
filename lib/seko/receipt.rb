@@ -19,7 +19,8 @@ module Seko
             "ReceiptLineItem" => line_items(items)
           },
           "Receipt" => {
-            "ASNNumber" => random_asn
+            "ASNNumber" => random_asn,
+            "IsReturn" => true
           },
           "ReceiptHeader" => {
             "DCCode" => warehouse
