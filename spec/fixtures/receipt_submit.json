@@ -17,7 +17,8 @@
       ]
     },
     "Receipt": {
-      "ASNNumber": 123456
+      "ASNNumber": 123456,
+      "IsReturn": true
     },
     "ReceiptHeader": {
       "DCCode": "DC123"
