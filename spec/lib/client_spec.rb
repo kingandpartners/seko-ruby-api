@@ -114,7 +114,7 @@ describe Seko::Client do
         to_return(body: success_response.to_json, headers: json_headers)
     end
 
-    let(:response) { client.submit_receipt(line_items_array, order_hash[:warehouse]) }
+    let(:response) { client.submit_receipt(return_auth_hash, order_hash[:warehouse]) }
 
     it 'sends an POST request with a receipt object' do
       expect(response.success?).to eq(true)

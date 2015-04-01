@@ -23,7 +23,7 @@ describe Seko::Receipt do
     it 'formats a fully formed JSON ready hash for receipt' do
       expected_result = fixture(:receipt_submit)
       expect(Seko::Receipt).to receive(:random_asn).and_return(123456)
-      expect(Seko::Receipt.format(line_items_array, 'DC123')).to eq(expected_result)
+      expect(Seko::Receipt.format(return_auth_hash, 'DC123')).to eq(expected_result)
     end
   end
 

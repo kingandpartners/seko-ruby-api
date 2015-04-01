@@ -102,7 +102,7 @@ module Seko
       post(Product.format(product_hash))
     end
 
-    def submit_receipt(line_item_array, warehouse)
+    def send_return_request(line_item_array, warehouse)
       @service  = 'receipts'
       @endpoint = 'submit'
       post(Receipt.format(line_item_array, warehouse))
@@ -164,6 +164,10 @@ module Seko
 
     def path
       "#{API_PATH}#{service}/#{API_VERSION}/#{endpoint}.json"
+    end
+
+    def requires_warehouse?
+      true
     end
 
     private
