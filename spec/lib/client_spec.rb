@@ -108,13 +108,13 @@ describe Seko::Client do
     end
   end
 
-  describe '#submit_receipt' do
+  describe '#send_return_request' do
     before do
       stub_post("receipts/v1/submit.json").with(query: {token: token}).
         to_return(body: success_response.to_json, headers: json_headers)
     end
 
-    let(:response) { client.submit_receipt(return_auth_hash, order_hash[:warehouse]) }
+    let(:response) { client.send_return_request(return_auth_hash, order_hash[:warehouse]) }
 
     it 'sends an POST request with a receipt object' do
       expect(response.success?).to eq(true)
