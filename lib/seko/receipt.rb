@@ -12,15 +12,16 @@ module Seko
       end
     end
 
-    def self.format(items, warehouse)
+    def self.format(return_auth, warehouse)
       {
         "Request" => {
           "List" => {
-            "ReceiptLineItem" => line_items(items)
+            "ReceiptLineItem" => line_items(return_auth[:line_items])
           },
           "Receipt" => {
-            "ASNNumber" => random_asn,
-            "IsReturn" => true
+            "ASNNumber"   => random_asn,
+            "HBReference" => return_auth[:number],
+            "IsReturn"    => true
           },
           "ReceiptHeader" => {
             "DCCode" => warehouse

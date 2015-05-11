@@ -94,6 +94,13 @@ def address_hash
   }
 end
 
+def return_auth_hash
+  {
+    number: 'RMA123456789',
+    line_items: line_items_array
+  }
+end
+
 def line_items_array
   [
     {

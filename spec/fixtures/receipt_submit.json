@@ -17,8 +17,9 @@
       ]
     },
     "Receipt": {
-      "ASNNumber": 123456,
-      "IsReturn": true
+      "ASNNumber":   123456,
+      "HBReference": "RMA123456789",
+      "IsReturn":    true
     },
     "ReceiptHeader": {
       "DCCode": "DC123"
