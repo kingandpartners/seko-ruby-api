@@ -44,6 +44,7 @@ module Seko
       {
         "City"         => address[:city],
         "CountryCode"  => address[:country],
+        "State"        => address[:state],
         "EmailAddress" => email,
         "FirstName"    => address[:first_name],
         "LastName"     => address[:last_name],
