@@ -85,6 +85,7 @@ def address_hash
   {
     city:       'Windsor',
     country:    'GB',
+    state:      '',
     first_name: 'Stephen',
     last_name:  'Jones',
     address1:   '23 Victoria Street',
@@ -137,6 +138,7 @@ end
 def company_address_hash
   {
     city:         'High Wycombe',
+    state:        '',
     country:      'GB',
     country_name: 'Buckinghamshire',
     address1:     'The Farthings',
