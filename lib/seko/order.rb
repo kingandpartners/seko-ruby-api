@@ -34,7 +34,9 @@ module Seko
           "SalesOrderHeader" => { "DCCode" => order[:warehouse] },
           "#{order_prefix}SalesOrder" => {
             "SalesOrderDate"   => order[:date],
-            "SalesOrderNumber" => order[:number]
+            "SalesOrderNumber" => order[:number],
+            "CourierName"      => order[:shipping_method],
+            "CourierService"   => order[:shipping_method]
           }
         }
       }

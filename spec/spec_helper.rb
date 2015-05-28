@@ -124,6 +124,7 @@ def order_hash
     number:           123456,
     email:            'stephen.jones@gmail.com',
     shipping_address: address_hash,
+    shipping_method:  'DLP',
     line_items:       line_items_array,
     warehouse:        'DC123',
     date:             '2013-12-12',
