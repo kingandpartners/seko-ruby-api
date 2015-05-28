@@ -208,10 +208,11 @@ order = {
     zipcode:    "10012",
     phone:      "123-123-1234"
   },
-  email:        "someone@somehwere.com",
-  number:       "R123123123",
-  warehouse:    "DC123",
-  date:         "2013-12-12",
+  email:           "someone@somehwere.com",
+  number:          "R123123123",
+  warehouse:       "DC123",
+  date:            "2013-12-12",
+  shipping_method: "DLP 12 22",
   line_items: [
     {
       quantity: "1",
