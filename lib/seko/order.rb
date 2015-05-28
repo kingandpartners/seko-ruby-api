@@ -34,7 +34,9 @@ module Seko
           "SalesOrderHeader" => { "DCCode" => order[:warehouse] },
           "#{order_prefix}SalesOrder" => {
             "SalesOrderDate"   => order[:date],
-            "SalesOrderNumber" => order[:number]
+            "SalesOrderNumber" => order[:number],
+            "CourierName"      => order[:shipping_method],
+            "CourierService"   => order[:shipping_method]
           }
         }
       }
@@ -44,6 +46,7 @@ module Seko
       {
         "City"         => address[:city],
         "CountryCode"  => address[:country],
+        "State"        => address[:state],
         "EmailAddress" => email,
         "FirstName"    => address[:first_name],
         "LastName"     => address[:last_name],
