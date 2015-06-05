@@ -34,12 +34,21 @@ module Seko
           "SalesOrderHeader" => { "DCCode" => order[:warehouse] },
           "#{order_prefix}SalesOrder" => {
             "SalesOrderDate"   => order[:date],
-            "SalesOrderNumber" => order[:number],
-            "CourierName"      => order[:shipping_carrier],
-            "CourierService"   => order[:shipping_method]
-          }
+            "SalesOrderNumber" => order[:number]
+          }.merge(courier_attributes(order))
         }
       }
+    end
+
+    def self.courier_attributes(order)
+      if order[:shipping_carrier] != 'N/A'
+        {
+          "CourierName"      => order[:shipping_carrier],
+          "CourierService"   => order[:shipping_method]
+        }
+      else
+        {}
+      end
     end
 
     def self.address(address, email)
