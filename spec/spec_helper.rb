@@ -125,7 +125,7 @@ def order_hash
     email:            'stephen.jones@gmail.com',
     shipping_address: address_hash,
     shipping_carrier: 'DLP',
-    shipping_method:     '743',
+    shipping_method:  '743',
     line_items:       line_items_array,
     warehouse:        'DC123',
     date:             '2013-12-12',
