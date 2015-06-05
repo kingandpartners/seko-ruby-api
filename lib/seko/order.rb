@@ -35,7 +35,7 @@ module Seko
           "#{order_prefix}SalesOrder" => {
             "SalesOrderDate"   => order[:date],
             "SalesOrderNumber" => order[:number],
-            "CourierName"      => order[:shipping_method],
+            "CourierName"      => order[:shipping_carrier],
             "CourierService"   => order[:shipping_method]
           }
         }

@@ -29,7 +29,7 @@
       "SalesOrderDate": "2013-12-12",
       "SalesOrderNumber": 123456,
       "CourierName": "DLP",
-      "CourierService": "DLP"
+      "CourierService": "743"
     },
     "ShipToCompany": {
       "CompanyCode": "IND001",
