@@ -41,7 +41,7 @@ module Seko
     end
 
     def self.courier_attributes(order)
-      if order[:shipping_carrier] != 'N/A'
+      if has_courier?(order)
         {
           "CourierName"      => order[:shipping_carrier],
           "CourierService"   => order[:shipping_method]
@@ -49,6 +49,11 @@ module Seko
       else
         {}
       end
+    end
+
+    def self.has_courier?(order)
+      order[:shipping_carrier] != nil &&
+      order[:shipping_carrier] != 'N/A'
     end
 
     def self.address(address, email)
