@@ -3,6 +3,7 @@
     "DeliveryDetails": {
       "City": "Windsor",
       "CountryCode": "GB",
+      "County": "",
       "EmailAddress": "stephen.jones@gmail.com",
       "FirstName": "Stephen",
       "LastName": "Jones",
@@ -26,7 +27,9 @@
     "SalesOrderHeader": { "DCCode": "DC123" },
     "SalesOrder": {
       "SalesOrderDate": "2013-12-12",
-      "SalesOrderNumber": 123456
+      "SalesOrderNumber": 123456,
+      "CourierName": "DLP",
+      "CourierService": "743"
     },
     "ShipToCompany": {
       "CompanyCode": "IND001",

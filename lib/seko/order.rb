@@ -35,15 +35,32 @@ module Seko
           "#{order_prefix}SalesOrder" => {
             "SalesOrderDate"   => order[:date],
             "SalesOrderNumber" => order[:number]
-          }
+          }.merge(courier_attributes(order))
         }
       }
+    end
+
+    def self.courier_attributes(order)
+      if has_courier?(order)
+        {
+          "CourierName"      => order[:shipping_carrier],
+          "CourierService"   => order[:shipping_method]
+        }
+      else
+        {}
+      end
+    end
+
+    def self.has_courier?(order)
+      order[:shipping_carrier] != nil &&
+      order[:shipping_carrier] != 'N/A'
     end
 
     def self.address(address, email)
       {
         "City"         => address[:city],
         "CountryCode"  => address[:country],
+        "County"       => address[:state],
         "EmailAddress" => email,
         "FirstName"    => address[:first_name],
         "LastName"     => address[:last_name],

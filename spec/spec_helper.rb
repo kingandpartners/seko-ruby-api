@@ -85,6 +85,7 @@ def address_hash
   {
     city:       'Windsor',
     country:    'GB',
+    state:      '',
     first_name: 'Stephen',
     last_name:  'Jones',
     address1:   '23 Victoria Street',
@@ -123,6 +124,8 @@ def order_hash
     number:           123456,
     email:            'stephen.jones@gmail.com',
     shipping_address: address_hash,
+    shipping_carrier: 'DLP',
+    shipping_method:  '743',
     line_items:       line_items_array,
     warehouse:        'DC123',
     date:             '2013-12-12',
@@ -137,6 +140,7 @@ end
 def company_address_hash
   {
     city:         'High Wycombe',
+    state:        '',
     country:      'GB',
     country_name: 'Buckinghamshire',
     address1:     'The Farthings',
