@@ -214,8 +214,8 @@ module Seko
       # log request and raw response
       @options[:verbose] = true
       puts "\nERROR: HTTP request error:"
-      puts "request: #{request}"
-      puts "response: #{response}"
+      puts "request: #{request.inspect}"
+      puts "response: #{response.inspect}"
       @options[:verbose] = false
 
       # let exception bubble up
