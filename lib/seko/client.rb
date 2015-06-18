@@ -11,9 +11,9 @@ module Seko
     API_PATH     = '/hub/api/'
     API_VERSION  = 'v1'
     CONTENT_TYPE = 'application/json'
-    KEYS_MAP     = { 
-      "FreeQuantity" => "qty", 
-      "ProductCode"  => "upc" 
+    KEYS_MAP     = {
+      "FreeQuantity" => "qty",
+      "ProductCode"  => "upc"
     }
 
     attr_accessor :token, :response, :type, :request_uri, :path, :service, :endpoint, :options
@@ -81,7 +81,7 @@ module Seko
     end
 
     def mapped_inventory(upcs, inventory)
-      inventory.collect do |stock| 
+      inventory.collect do |stock|
         if upcs.include?(stock["upc"])
           { quantity: stock["qty"].to_i }
         end
@@ -172,7 +172,7 @@ module Seko
 
     private
     def default_options
-      { 
+      {
         verbose: false,
         test_mode: true
       }
@@ -187,7 +187,7 @@ module Seko
     end
 
     def host
-      testing? ? TEST_HOST : LIVE_HOST 
+      testing? ? TEST_HOST : LIVE_HOST
     end
 
     def log(message)
@@ -210,6 +210,16 @@ module Seko
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       response = http.request(request)
       parse_response(response.body)
+    rescue Exception => e
+      # log request and raw response
+      @options[:verbose] = true
+      log("\nERROR: HTTP request error:")
+      log("request: #{request}")
+      log("response: #{response}")
+      @options[:verbose] = false
+
+      # let exception bubble up
+      raise e
     end
 
     def get(url = request_uri)
