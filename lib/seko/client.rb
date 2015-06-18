@@ -213,9 +213,9 @@ module Seko
     rescue Exception => e
       # log request and raw response
       @options[:verbose] = true
-      log("\nERROR: HTTP request error:")
-      log("request: #{request}")
-      log("response: #{response}")
+      puts "\nERROR: HTTP request error:"
+      puts "request: #{request}"
+      puts "response: #{response}"
       @options[:verbose] = false
 
       # let exception bubble up
